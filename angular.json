@@ -27,7 +27,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bulma/css/bulma.css"
             ],
             "scripts": []
           },
@@ -127,5 +128,11 @@
       }
     }
   },
-  "defaultProject": "dynamic-bulma-modal"
+  "defaultProject": "dynamic-bulma-modal",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics",
+    "warnings": {
+      "typescriptMismatch": false
+    }
+  }
 }
