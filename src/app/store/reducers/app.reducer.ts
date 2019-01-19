@@ -1,15 +1,15 @@
 import * as AppActions from '../actions/app.actions';
-import { ComponentRef } from '@angular/core';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Type } from '@angular/core';
 
 export interface State {
     showModal: boolean;
-    componentRef: any;
+    componentType: Type<any>;
 }
 
 const initialState: State = {
     showModal: false,
-    componentRef: null
+    componentType: null
 };
 
 const getModalState = createFeatureSelector<State>('modal');
@@ -19,9 +19,9 @@ export const getModalShow = createSelector(
     state => state.showModal
 );
 
-export const getModalRef = createSelector(
+export const getComponentType = createSelector(
     getModalState,
-    state => state.componentRef
+    state => state.componentType
 );
 
 export function reducer(
@@ -31,15 +31,16 @@ export function reducer(
     switch (action.type) {
         case AppActions.AppActionTypes.OPEN_MODAL: {
             return {
+                ...state,
                 showModal: true,
-                componentRef: action.payload.content
+                componentType: action.payload.content
             };
         }
 
         case AppActions.AppActionTypes.CLOSE_MODAL: {
             return {
-                showModal: false,
-                componentRef: null
+                ...state,
+                showModal: false
             };
         }
 
@@ -47,5 +48,3 @@ export function reducer(
             return state;
     }
 }
-
-export const getShowModal = (state: State) => state.showModal;
